@@ -20,6 +20,10 @@ Create a simple calendar application that allows the user to save events for eac
 
 - To store each lines comment, I used localstorage. Also getting data from there everytime user reflesh the page.
 
+## Bug / fix log
+
+- js line 41, finally I got how to write with jQuery
+
 ## Acceptance Criteria
 
 ```
