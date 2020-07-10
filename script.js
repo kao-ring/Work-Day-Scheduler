@@ -8,26 +8,37 @@ timerInterval = setInterval(function () {
   colorChange();
 }, 1000);
 
-//Make rows and colums
+//Make rows and colums========================
 var row;
 var col1;
 var col2;
 var col3;
 
 for (let i = 9; i < 24; i++) {
-  row = $('<div class="row" id= ' + i + " >");
-  col1 = $('<div class="col-sm-2"> <p class="hour">' + hourFormat(i) + "</p>");
+  row = $(`<div class="row" id= ${i} >`);
+  col1 = $('<div class="col-md-2"> <p class="hour">' + hourFormat(i) + "</p>");
   col2 = $(
-    '<div class="col-sm-8"><textarea id=col2${i} class="description"></textarea>`'
+    `<div class="col-md-8"><textarea  class="description" id=col2${i}></textarea>`
   );
   col3 = $(
-    '<div class="col-sm-2"><button class="saveBtn">Save <i class="fa fa-save"></i></button>'
+    `<div class="col-md-2" ><button class="saveBtn" id=${i}>Save <i class="fa fa-save"></i></button>`
   );
 
   row.append(col1);
   row.append(col2);
   row.append(col3);
   $(".container").append(row);
+
+  getComment(i);
+}
+
+//Helper functions===========================
+function getComment(num) {
+  var comment = localStorage.getItem(num);
+
+  if (comment !== null) {
+    document.querySelector("#col2" + num).textContent = comment;
+  }
 }
 
 function hourFormat(time) {
@@ -42,15 +53,12 @@ function hourFormat(time) {
 
 function colorChange() {
   for (let i = 9; i < 24; i++) {
-    var idCol2 = document.querySelector(`#col2${i}`);
+    var idCol2 = $(`#col2${i}`);
     if (i === currentTime) {
-      console.log(`${i}Yes! It's time to change color`);
       idCol2.addClass("present");
     } else if (i > currentTime) {
-      console.log(`${i}それは未来だね。`);
       idCol2.addClass("future");
     } else if (i < currentTime) {
-      console.log(`${i}それはpastだね。`);
       idCol2.addClass("past");
     }
   }
@@ -58,5 +66,14 @@ function colorChange() {
 
 //save input data
 
-//実験場＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋＝＋
-console.log("This is kiki testing");
+var saveBtn = $(".saveBtn");
+var commentId;
+var commentText;
+
+saveBtn.on("click", function () {
+  commentId = $(this).attr("id");
+  commentText = $(this).parent().siblings().children(".description").val();
+  console.log(commentId);
+  console.log(commentText);
+  localStorage.setItem(commentId, commentText);
+});
