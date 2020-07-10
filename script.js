@@ -37,7 +37,8 @@ function getComment(num) {
   var comment = localStorage.getItem(num);
 
   if (comment !== null) {
-    document.querySelector("#col2" + num).textContent = comment;
+    // document.querySelector("#col2" + num).textContent = comment;
+    $("#col2" + num).append(comment);
   }
 }
 
