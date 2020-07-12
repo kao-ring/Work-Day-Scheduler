@@ -17,9 +17,12 @@ $(document).ready(function () {
   var col3;
 
   for (let i = 9; i < 24; i++) {
-    row = $(`<div class="row" id= ${i} >`);
+    row = $(`<div class="row">`);
+    // row = $(`<div class="row" id= ${i} >`);
     col1 = $(
-      '<div class="col-md-2"> <p class="hour">' + hourFormat(i) + "</p>"
+      '<div class="col-md-2 p-0 hour-col"> <p class="hour">' +
+        hourFormat(i) +
+        "</p>"
     );
     col2 = $(
       `<div class="col-md-8"><textarea  class="description" id=col2${i}></textarea>`
